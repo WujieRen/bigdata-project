@@ -125,6 +125,26 @@
     - HDFS相关命令
     - HDFS架构
     - HDFSJavaAPI
+      - 第一个例子就遇到个问题：
+      ```sbtshell
+      java.lang.NoClassDefFoundError: org/apache/hadoop/fs/FSDataOutputStream
+      ...
+      Caused by: java.lang.ClassNotFoundException: org.apache.hadoop.fs.FSDataOutputStream
+      ...
+      ```
+      - 原因：依赖的问题。（王鑫说找不到包通常和依赖相关，比如依赖冲突等）
+          ```xml
+          <dependency>
+              <groupId>org.apache.hadoop</groupId>
+              <artifactId>hadoop-common</artifactId>
+              <version>${hadoop.version}</version>
+              <scope>provided</scope>
+          </dependency>
+          ```
+      - 解决：去掉上述依赖中的<scope>provided</scope>即可。
+      - 这也让我去了解了些下<a href="https://blog.csdn.net/kimylrong/article/details/50353161">scope</a>  
+      > reference1: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html  
+      reference2: http://ifeve.com/maven-dependency-mechanism/  
     - MapReduce原理及demo
 3. HBase
 4. Hive
