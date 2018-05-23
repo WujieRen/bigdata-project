@@ -71,7 +71,7 @@
             <value>sparkproject1:50090</value>
         </property>
         ```
-        -外部UI界面访问： sparkprojet1:50090
+        - 外部UI界面访问： sparkprojet1:50090
       - MapReduce自带历史服务器
         - mapred-site.xml
         ```xml
