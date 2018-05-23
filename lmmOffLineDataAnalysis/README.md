@@ -2,7 +2,7 @@
 1. Linux + Java
 2. Hadoop
     - 安装
-      - hdfs部分
+      - HDFS部分
         - 1 <a href="http://archive.apache.org/dist/hadoop/core/">下载hadoop</a>，并解压至相应目录。（建议删掉$HADOOP_HOME/share/doc目录）
         - 2 指定JAVA_HOME，包括以下文件
           - $HADOOP_HOME/etc/hadoop/hdfs-env.sh
@@ -30,12 +30,12 @@
               ```
         - 5 $HADOOP_HOME/etc/hadoop/slaves：
           - 添加datanode所在的机器的hostname
-        - 6 格式化hdfs
+        - 6 格式化HDFS
             ```sbtshell
             $HADOOP_HOME/bin/hdfs -format 
             ```
         - 7 测试。可以创建目录，上传文件等。 
-          - 浏览器查看：hostname:50070
+          - 浏览器查看：sparkproject1:50070
       - mapreduce部分
         - 1 mapred-site.xml
           - mapreduce设置运行在yarn上
@@ -62,10 +62,69 @@
             </property>
             ```
         - 3 启动 & 测试（运行一个mapreduce任务）
-          - 浏览器查看：hostname:8088
-    - hdfs相关命令
-    - hdfs架构
-    - hdfsJavaAPI
+          - 浏览器查看：sparkproject1:8088
+      - SecondaryNameNode
+        - hdfs-site.xml
+        ```xml
+        <property>
+            <name>dfs.namenode.secondary.http-address</name>
+            <value>sparkproject1:50090</value>
+        </property>
+        ```
+        -外部UI界面访问： sparkprojet1:50090
+      - MapReduce自带历史服务器
+        - mapred-site.xml
+        ```xml
+        <property>
+            <name>mapreduce.jobhistory.address</name>
+            <value>sparkproject1:10020</value>
+        </property>
+        <property>
+            <name>mapreduce.jobhistory.webapp.address</name>
+            <value>sparkproject1:19888</value>
+        </property>
+        ```
+        - 启动
+        ```sbtshell
+        $ sbin/mr-jobhistory-daemon.sh start historyserver
+        ```
+      - 日志聚合，开启并指定保存期限
+        - yarn-site.xml
+        ```xml
+        <property>
+            <name>yarn.log-aggregation-enable</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>yarn.log-aggregation.retain-seconds</name>
+            <value>106800</value>
+        </property>
+        <!-- 另外，yarn.nodemanager.remote-app-log-dir代表日志转移到HDFS上的目录路径。
+                1.默认路径：/tmp/logs
+                2.可用户自定义
+        -->
+        ```
+      - HDFS文件权限检测
+        - HDFS的文件目录权限和Linux文件目录权限是一样的
+        - hdfs-site.xml
+        ```xml
+        <!-- 关闭用户权限检测 -->
+        <property>
+            <name>dfs.permissions.enabled</name>
+            <value>false</value>
+        </property>
+        <!-- 指定Hadoop的http静态用户名，可配置项 -->
+        <property>
+            <name>hadoop.http.staticuser.user</name>
+            <value>renwujie</value>
+        </property>
+        ```
+      - 总结：
+        - 配置完历史服务器和日至聚合后需要重启HDFS的所有进程。
+        - 启动过程注意先启动HDFS在启动yarn。
+    - HDFS相关命令
+    - HDFS架构
+    - HDFSJavaAPI
     - MapReduce原理及demo
 3. HBase
 4. Hive
