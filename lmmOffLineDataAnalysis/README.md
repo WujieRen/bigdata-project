@@ -142,7 +142,7 @@
           </dependency>
           ```
       - 解决：去掉上述依赖中的<scope>provided</scope>即可。
-      - 这也让我去了解了些下<a href="https://blog.csdn.net/kimylrong/article/details/50353161">scope</a>  
+      - 这也促使我去了解了下<a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html  ">scope</a>  
       > reference1: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html  
       reference2: http://ifeve.com/maven-dependency-mechanism/  
     - MapReduce原理及demo
