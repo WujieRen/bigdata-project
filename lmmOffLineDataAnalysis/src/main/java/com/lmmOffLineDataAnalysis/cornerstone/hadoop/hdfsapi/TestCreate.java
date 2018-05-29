@@ -15,8 +15,8 @@ import java.io.OutputStreamWriter;
 public class TestCreate {
 
     public static void main(String[] args) throws IOException {
-        //test1();
-        test2();
+        test1();
+        //test2();
     }
 
     static void test1() throws IOException{

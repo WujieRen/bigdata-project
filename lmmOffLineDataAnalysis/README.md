@@ -126,12 +126,12 @@
     - HDFS架构
     - HDFSJavaAPI
       - 第一个例子就遇到个问题：
-      ```sbtshell
-      java.lang.NoClassDefFoundError: org/apache/hadoop/fs/FSDataOutputStream
-      ...
-      Caused by: java.lang.ClassNotFoundException: org.apache.hadoop.fs.FSDataOutputStream
-      ...
-      ```
+          ```sbtshell
+          java.lang.NoClassDefFoundError: org/apache/hadoop/fs/FSDataOutputStream
+          ...
+          Caused by: java.lang.ClassNotFoundException: org.apache.hadoop.fs.FSDataOutputStream
+          ...
+          ```
       - 原因：依赖的问题。（王鑫说找不到包通常和依赖相关，比如依赖冲突等）
           ```xml
           <dependency>
