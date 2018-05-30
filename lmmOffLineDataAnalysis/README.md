@@ -146,6 +146,13 @@
       > reference1: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html  
       reference2: http://ifeve.com/maven-dependency-mechanism/  
     - MapReduce原理及demo
+      - 问题①：org.apache.hadoop.io.nativeio.NativeIO$Windows.createDirectoryWithMode0(Ljava/lang/String;I)V
+       - 原因：本地缺少hadoop.dll或者版本差异太大导致。
+       - 解决，下载或自己编译相应版本的hadoop.dll，放入C:\Windows\System32即可。
+       > 最好把相应的winutils.exe等文件也替换掉。
+     - 问题②：Type MissMatch
+       - 原因：在运行时job.setMapOutputValueClass(XXX.class)和MapReduceMapper中的数据类型不对应。
+       - 解决：改成正确数据类型。
 3. HBase
 4. Hive
 5. Nginx

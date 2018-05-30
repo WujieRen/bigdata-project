@@ -20,8 +20,10 @@ public class TestDelete {
         boolean deleted = fs.delete(new Path("/test-hdfs/api/createNewFile.txt"), true);
         System.out.println(deleted);
         deleted = fs.delete(new Path("/test-hdfs/api/mkdirs"), true);
-        //TODO:上面和下面这个咋都能删除???那第二个参数的意义是啥
+        //第二个参数是指是否递归删除
         //deleted = fs.delete(new Path("/test-hdfs/api/mkdirs"), false);
+        System.out.println(deleted);
+        fs.delete(new Path("/test-hdfs/api"), false);
         System.out.println(deleted);
         fs.close();
     }
